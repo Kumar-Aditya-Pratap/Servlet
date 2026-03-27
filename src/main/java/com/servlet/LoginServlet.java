@@ -18,6 +18,16 @@ public class LoginServlet extends HttpServlet {
 
         response.setContentType("text/html");
 
+        PrintWriter out = response.getWriter();
+
+        // UC3: Name Validation
+        if(!name.matches("[A-Z][a-zA-Z]{2,}")) {
+
+            out.println("<h3>Invalid Name</h3>");
+            out.println("Name must start with a capital letter and have at least 3 characters.");
+            return;
+        }
+
         if(name.equals("Admin") && password.equals("1234")) {
 
             request.setAttribute("user", name);
@@ -28,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 
         else {
 
-            PrintWriter out = response.getWriter();
             out.println("<h3>Invalid Login</h3>");
         }
     }
